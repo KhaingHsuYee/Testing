@@ -36,15 +36,17 @@ struct Node* creatNode( struct Node* newNode,int begin,int end){
 struct Node* insertNode(struct Node* root,int begin,int end){
 
 
-    root = creatNode(root,begin,end);
+    if(root == NULL){
+        root = creatNode(root,begin,end);
+    }
     int middle = (begin+end)/2;
 
 
 
-    if(a[(begin+(middle-1))/2] != root->data){
+    if(a[(begin+(middle-1))/2] != root->data && begin<=middle-1){
         root->left =  insertNode(root->left,begin,middle-1);
     }
-    if(a[(end+(middle+1))/2] != root->data){
+    if(a[(end+(middle+1))/2] != root->data && middle+1<=end){
         root->right = insertNode(root->right,middle+1,end);
     }
 
@@ -67,7 +69,7 @@ int main(){
         a[i] = i + 1;
     }
     int begin = 0;
-    int end = 19;
+    int end = 999;
     struct Node *root = NULL;
     root = insertNode(root,begin, end);
 
